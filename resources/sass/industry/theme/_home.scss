@@ -1,0 +1,433 @@
+.section-gap {
+	padding: 120px 0;
+}
+.section-title {
+	padding-bottom: 30px;
+	h2 {
+		margin-bottom: 20px;
+	}
+	p {
+		font-size: 16px;
+		margin-bottom: 0;
+		@include media-breakpoint-down (md) {
+			br {
+				display: none;
+			}
+		}
+	}
+}
+
+
+.primary-btn {
+	background-color:$primary-color;
+	line-height: 42px;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 25px;
+	border:none;
+	color: $white;
+	display: inline-block;
+	font-weight: 500;
+	position: relative;
+	@include transition();
+	cursor: pointer;
+	position: relative;
+	&:focus {
+		outline: none;
+	}
+	span {
+		color: $white;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-60%);
+		right: 30px;
+		@include transition();
+	}
+	&:hover {
+		color: $white;
+		span {
+			color: $white;
+			right: 20px;
+		}
+	}
+	&.white {
+		border: 1px solid $white;
+		color: $white;
+		span {
+			color: $white;
+		}
+		&:hover {
+			background: $white;
+			color: $primary-color;
+			span {
+				color: $primary-color;
+			}
+		}
+	}
+}
+
+
+.overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+//--------- Start Banner Area -------------//
+
+.banner-area {
+	// background:url(../../../../images/radar.png) center;
+	background-size:cover;
+	.fullscreen {
+		@include media-breakpoint-down (sm) {
+			height: 700px !important;
+		}
+	}
+
+	.overlay{
+		background:#000;
+		opacity:.5;
+	}
+
+	.primary-btn{
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+}
+.banner-content {
+	text-align:center;
+	h1{
+		color:$white;
+		font-size: 48px;
+		font-weight: 700;
+		line-height: 1em;
+		margin-top:20px;
+		margin-bottom:20px;
+		span{
+			font-weight:700;
+		}
+		@include media-breakpoint-down(md) {
+			font-size: 36px;
+		}
+		br {
+			@include media-breakpoint-down (md) {
+				display: none;
+			}
+		}
+
+		@include media-breakpoint-down (lg) {
+				font-size:45px;
+		}	
+
+		@media ( max-width:414px ) {
+			font-size:40px;
+		}
+	}
+	h6{
+		font-weight:300;
+		letter-spacing: 2px;
+		z-index:2;
+		color:$white;
+	}
+	@media(max-width:960px){
+		br{
+			display:none;
+		}
+	}
+
+}
+
+
+.header-btn{
+	background-color:$primary-color;
+	border-radius:0;
+	padding-left:30px;
+	padding-right:30px;
+	border:1px solid transparent;
+	color:$white;
+	&:hover{
+		border:1px solid $white;
+		background:transparent;
+		color:$white;
+	}
+}
+
+
+//--------- End Banner Area -------------//
+
+//--------- Start cat Area -------------//
+
+.cat-area{
+	#hexagon:hover{
+	  background: #EC008C;
+	}
+
+	#hexagon:hover:after{
+	  border-top: 25px solid #EC008C;
+	}
+	#hexagon:hover:before{
+	  border-bottom: 25px solid #EC008C;
+	}
+
+
+	.single-cat{
+		text-align:center;
+		p{
+			max-width:280px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+	}
+
+
+	.hb-sm {
+	    line-height: 40px;
+	    font-size: 28px;
+	}
+
+
+	.hb-facebook-inv, .hb-facebook-inv::after, .hb-facebook-inv::before, .hb-facebook:hover, .hb-facebook:hover::after, .hb-facebook:hover::before {
+	    border-color: #A7A7A7;
+	    color: #A7A7A7;
+	    background: 0 0;
+	}
+
+	.hb-facebook-inv:hover, .hb-facebook-inv:hover::after, .hb-facebook-inv:hover::before {
+	   	background-color:$primary-color;
+	    border-color: #A7A7A7;
+	    color: #fff;
+	}
+
+
+
+}
+
+//--------- End cat Area -------------//
+
+
+
+//--------- Start home-about Area -------------//
+
+.home-about-area{
+	background:$offwhite;
+}
+
+//--------- End home-about Area -------------//
+
+
+//--------- start Service Area -------------//
+
+.single-service{
+	h4{
+		padding:20px 0;
+		@include transition();
+	}
+	&:hover{
+		// cursor:pointer;
+		h4{
+			color:$primary-color;
+		}
+	}
+	.thumb{
+		overflow:hidden;
+		img{
+			width:100%;
+			height: 250px;
+			max-height: 250px;
+			@include transition();
+		}
+	}
+
+	&:hover{
+		.thumb img{
+			transform:scale(1.1) rotate(-4deg);
+		}
+		
+	}
+	@media(max-width:960px){
+		text-align:center;
+		margin-bottom:30px;
+	}
+
+}
+
+//--------- end Service Area -------------//
+
+
+//--------- Start project Area -------------//
+
+.single-project{
+	margin-bottom:30px;	
+	width:100%;
+	@include transition();
+	&:hover{
+		opacity:.7;
+	}
+}
+
+//--------- End project Area -------------//
+
+
+//--------- start blog Area -------------//
+
+	.blog-area{
+		h1{
+			text-align:center;
+			margin-bottom:25px;
+			font-weight:600;
+			text-transform:capitalize
+		}
+		p{
+			margin-bottom:45px;
+			text-align:center;
+		}
+	}
+
+	.single-blog{
+		.thumb{
+			overflow: hidden;
+		}
+		
+		h4{
+			text-transform:uppercase;
+			font-weight:600;
+			margin-top:35px;
+			@include transition();
+		}
+		a{
+			color:#222;
+		}
+		.name{
+			font-size:13px;
+			font-weight:100;
+		}
+		p{
+			text-align:left;
+			margin-top:15px;
+		}
+		.bottom{
+			padding:10px 0;
+			border-bottom:1px solid #eee;
+			span{
+				margin-left:10px;
+			}
+		}
+
+		@media(max-width:768px) {
+			margin-bottom:30px;
+			.meta{
+				margin-top:20px;
+			}
+		}
+		@media(max-width:767px){
+			.meta{
+				margin-top:0px;
+			}
+			
+		}	
+	
+		.f-img{
+			@include transition();
+		}
+		&:hover{
+			// cursor:pointer;
+			h4{
+				color:$primary-color;
+			}
+			.f-img{
+				cursor:pointer;
+				transform: scale(1.05);				
+			}
+		}
+
+	}
+
+
+//--------- end blog Area -------------//
+
+
+//--------- start footer Area -------------//
+
+	.footer-area{
+		padding-top:10px;
+		background-color: $white;
+		color: $vatger-blue;
+		// box-shadow: 21.213px -21.213px 30px 0px rgba(158, 158, 158, 0.6);
+		box-shadow: 0px 0px 30px 0px rgba(158, 158, 158, 0.6);
+	}
+
+//--------- end footer Area -------------//
+
+//----------- Start Generic Page -------------//
+
+.whole-wrap{
+	background-color:$white;
+}
+
+
+.generic-banner {
+	margin-top:60px;
+	background-color:$primary-color;
+	text-align:center;
+	.height {
+		height: 600px;
+		@include media-breakpoint-down (sm) {
+			height: 400px;
+		}
+	}
+	.generic-banner-content {
+		h2 {
+			line-height: 1.2em;
+			margin-bottom: 20px;
+			br {
+				@include media-breakpoint-down (md) {
+					display: none;
+				}
+			}
+		}
+		p {
+			text-align:center;
+			font-size: 16px;
+			br {
+				@include media-breakpoint-down (md) {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.generic-content{
+	h1{
+		font-weight:600;	
+	}
+}
+
+
+.about-generic-area {
+	background: $white;
+	.border-top-generic {
+
+	}
+	p {
+		margin-bottom: 20px;
+	}
+}
+.white-bg {
+	background: $white;
+}
+.section-top-border {
+	padding: 50px 0;
+	border-top: 1px dotted #eee;
+}
+.switch-wrap {
+	margin-bottom: 10px;
+	p {
+		margin: 0;
+	}
+}
+//----------- End Generic Page -------------//

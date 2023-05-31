@@ -1,0 +1,62 @@
+// VATGER Colors
+$vatger-blue: #2b3089; // R 43 G 48 B 137
+$vatger-gray: #b9b8b8; // R 185 G 184 B 184
+$vatger-red: #e63329; // R 230 G 51 B 41
+$vatger-yellow: #ffd000; // R 255 G 208 B 0
+
+@import 'nunito.css';
+$font-family-sans-serif: 'Nunito' !default;
+
+@import 'mixins';
+@import 'variables';
+
+// Import Dashboard styles
+@import '~admin-lte/build/scss/AdminLTE'; //v3.0.5
+//@import "~admin-lte/build/scss/adminlte";
+
+// Cookie Consent Style
+@import 'cookie-consent';
+
+// Custom
+//
+// Table divider
+tr.divider {
+	text-align: center;
+	font-weight: bold;
+	font-size: .85em;
+	// background-color: $vatger-blue;
+	// color: lighten($vatger-gray, .75);
+}
+tr.divider > td {
+	padding: 0;
+}
+
+// Chart Type Colors
+// aoi,afc,agc,apc,sid,star,iac
+.chart-aoi {
+	background-color: #cccccc;
+}
+.chart-afc {
+	background-color: #b17193;
+}
+.chart-agc {
+	background-color: #fcb498;
+}
+.chart-apc {
+	background-color: #fcb498;
+}
+.chart-sid {
+	background-color: #5eb84a;
+}
+.chart-start {
+	background-color: #fda74e;
+}
+.chart-iac {
+	background-color: #4ebdd7;
+}
+
+// Livemap Styling
+.livemap {
+	min-height: 75vh;
+	min-width: 100%;
+}

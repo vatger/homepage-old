@@ -1,0 +1,33 @@
+.js-cookie-consent {
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    padding: 1.5rem;
+    margin: 0;
+    background-color: $vatger-blue;
+    color: $vatger-gray;
+    z-index: 9999999999;
+    text-align: center;
+}
+
+.js-cookie-consent > button.js-cookie-consent-agree {
+	background-color: rgba(43, 48, 137, .35);
+    box-shadow: none;
+    color: $vatger-yellow !important;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 1.25em;
+    border: 0;
+    border-bottom: $vatger-yellow .6px dashed;
+}
+
+.js-cookie-consent > button.js-cookie-consent-agree:hover {
+	background-color: rgb(255, 208, 0, .75);
+    box-shadow: none;
+    color: #ffffff !important;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 1.25em;
+    border: 0;
+}

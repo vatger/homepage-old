@@ -1,0 +1,47 @@
+
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+
+//
+// Grid mixins
+//
+
+@import "bootstrap/mixins/breakpoints";
+
+
+// including variables and mixins
+@import "theme/variables";
+@import "theme/mixins";
+@import "theme/flexbox";
+@import "theme/reset";
+
+
+// Custom Scss
+@import "theme/header";
+@import "theme/home";
+
+// Customization
+img.logo_spacer {
+	margin: 0;
+	margin-left: .4em;
+	margin-right: .4em;
+	min-height: 35px;
+	max-height: 35px;
+	height: 35px;
+	width: auto;
+}
+
+.cat-area .single-cat p {
+	max-width: 320px;
+}
+
+.table {
+	text-align: left;
+}
+
+.max-height-350 {
+	max-height: 350px !important;
+	height: 350px !important;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}

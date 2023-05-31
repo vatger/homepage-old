@@ -1,0 +1,111 @@
+@extends('frontend.master')
+
+@section('component')
+            <!-- Banner -->
+                <section id="banner">
+                    <div class="content">
+                        <header>
+                            <h2>{{ config('app.name') }}</h2>
+                            <p>Controlling The Virtual German Airspace With Passion!</p>
+                        </header>
+                    </div>
+                    <a href="#welcome" class="goto-next scrolly">Next</a>
+                </section>
+
+            <!-- Welcome -->
+                <section id="welcome" class="spotlight style2 bottom">
+                    <span class="image fit main"><img src="{{ asset('images/radar.png') }}" alt="" /></span>
+                    <div class="content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4 col-12-medium">
+                                    <header>
+                                        <h2>Willkommen bei VATSIM Germany</h2>
+                                        <p>Der vACC für Deutschland im VATSIM Netzwerk.</p>
+                                    </header>
+                                </div>
+                                <div class="col-4 col-12-medium">
+                                    <p>VATSIM Germany ist Mitglied in der <b><a href="https://www.vateud.net" target="_blank">VATSIM Europe Division</a></b>, die wiederum mit den Divisions <b><a href="https://www.vatsim-uk.co.uk" target="_blank">UK</a></b> und <b><a href="https://www.vatrus.info" target="_blank">Russia</a></b> die <b><a href="https://www.vatsim.eu/" target="_blank">VATSIM Europe Region</a></b> bildet.</p>
+                                </div>
+                                <div class="col-4 col-12-medium">
+                                    <p>Wir hoffen, dass es Euch auf unseren Webseiten gefällt und wünschen Euch immer "blue skies" und "always three greens".</p>
+                                    <p>Euer VATGER Staff</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#atc" class="goto-next scrolly">Next</a>
+                </section>
+
+                <section id="atc" class="wrapper style2 fade-up">
+                    <div class="container">
+                        <header class="major">
+                            <h2>ATC Abdeckung</h2>
+                            <p>Was aktuell los ist und was in den nächsten 48 Stunden geplant ist.</p>
+                        </header>
+                        <div class="box">
+                            <div class="row gtr-uniform">
+                                <section class="col-6 col-12-small">
+                                {{-- Atc Bookings --}}
+                                    <atc-bookings-component :dashboard="false"></atc-bookings-component>
+                                </section>
+                                <section class="col-6 col-12-small">
+                                {{-- Atc Current --}}
+                                    <atc-live-component :dashboard="false"></atc-live-component>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#services" class="goto-next scrolly">Next</a>
+                </section>
+
+            {{-- Services --}}
+                <section id="services" class="wrapper style1 special fade-up">
+                    <div class="container">
+                        <header class="major">
+                            <h2>Dienste der vACC Germany</h2>
+                            <p>Als vACC Germany stellen wir einige Dienste zur Verfügung, die das Fliegen / Lotsen auf dem VATSIM Netzwerk in Deutschland "as real as it gets" machen.</p>
+                        </header>
+                        <div class="box alt">
+                            <div class="row gtr-uniform">
+                                <section class="col-4 col-6-medium col-12-xsmall">
+                                    <span class="icon solid alt major fa-chart-area"></span>
+                                    <h3>Statistic Center</h3>
+                                    <p>Finde heraus, was passiert. Schau dir deine persönliche Statistik oder die von Freunden an.</p>
+                                </section>
+                                <section class="col-4 col-6-medium col-12-xsmall">
+                                    <span class="icon solid alt major fa-comment"></span>
+                                    <h3>Gemeinschaft</h3>
+                                    <p>Tausche dich mit Gleichgesinnten in unserem Forum oder auf unserem TeamSpeak aus.</p>
+                                </section>
+                                <section class="col-4 col-6-medium col-12-xsmall">
+                                    <span class="icon solid alt major fa-flask"></span>
+                                    <h3>Wissensdatenbank</h3>
+                                    <p>Vertiefe dein Wissen rund um die Luftfahrt. Unser Wiki hält viele Informationen parat.</p>
+                                </section>
+                                <section class="col-4 col-6-medium col-12-xsmall">
+                                    <span class="icon solid alt major fa-paper-plane"></span>
+                                    <h3>Fliegen</h3>
+                                    <p>Der Hauptgrund unseres Hobbys. Ob VFR oder IFR, jeder ist immer Willkommen.</p>
+                                </section>
+                                <section class="col-4 col-6-medium col-12-xsmall">
+                                    <span class="icon solid alt major fa-file"></span>
+                                    <h3>Material</h3>
+                                    <p>Die vACC Germany bietet einige Materialien, die das Fliegen auf VATSIM vereinfachen.</p>
+                                </section>
+                                <section class="col-4 col-6-medium col-12-xsmall">
+                                    <span class="icon solid alt major fa-lock"></span>
+                                    <h3>Datenschutz / Sicherheit</h3>
+                                    <p>Datenschutz und Datensicherheit stehen bei uns an oberster Stelle. Es werden nur Daten erhoben, die wir unbedingt benötigen.</p>
+                                </section>
+                            </div>
+                        </div>
+                        <footer class="major">
+                            <ul class="actions special">
+                                <li><a href="{{ route('vatauth.login') }}" class="button button-join">Mach Mit!</a></li>
+                            </ul>
+                        </footer>
+                    </div>
+                </section>
+
+@endsection
