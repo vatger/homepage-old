@@ -1,3 +1,7 @@
+> **Warning** 
+> 
+> This repository is no longer actively maintained! Whilst some security updates (if applicable) are applied, no new features will be implemented. If you wish to receive access to the Homepage V4, please check the project overview page [here](https://github.com/vatger/project-overview).
+
 ### VATSIM Germany Webservice
 Dieses Repository enthält den Quellcode der VATSIM Germany Webservices.
 
