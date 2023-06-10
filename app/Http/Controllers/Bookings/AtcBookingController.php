@@ -92,7 +92,7 @@ class AtcBookingController extends VatBookController
 	            }
 	            // As we now have our end date
 	            // we can try to find stuff
-                if(auth()->check())
+                if(auth()->check() || $request->bearerToken() == config('booking.atcBookingToken'))
                     return AtcSessionBooking::orderBy('starts_at', 'ASC')
                         ->with('station', 'controller')
                         ->whereBetween('starts_at', [$s, $e])
