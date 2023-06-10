@@ -163,8 +163,10 @@
                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
                                         <!-- <date-picker v-model="from" lang="de" format="DD.MM.YYYY HH:mm" date-format="DD.MM.YYYY HH:mm" type="datetime" value-type="format" :first-day-of-week="1" :not-before="renderTimeNow()" :minute-step="15"></date-picker> -->
-                                        <date-picker v-model="from" lang="de" format="DD.MM.YYYY HH:mm" date-format="DD.MM.YYYY HH:mm" type="datetime" value-type="format" :first-day-of-week="1"
-                                                     :minute-step="15" :default-value="renderTimeNow().date()"></date-picker>
+                                        <date-picker v-model="from" lang="de" format="DD.MM.YYYY" type="date" value-type="date" :not-before="new Date()"
+                                                     :default-value="new Date()" partial-update="true"></date-picker>
+                                        <date-picker v-model="from_time" lang="de" format="HH:mm" type="time" value-type="format" show-second="false" :minute-step="15"
+                                                     partial-update="true"></date-picker>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -173,9 +175,10 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <!-- <date-picker v-model="till" lang="de" format="DD.MM.YYYY HH:mm" date-format="DD.MM.YYYY HH:mm" type="datetime" value-type="format" :first-day-of-week="1" :not-before="renderTimeNow()" :minute-step="15"></date-picker> -->
-                                        <date-picker v-model="till" lang="de" format="DD.MM.YYYY HH:mm" date-format="DD.MM.YYYY HH:mm" type="datetime" value-type="format" :first-day-of-week="1"
-                                                     :minute-step="15" :default-value="renderTimeNow()"></date-picker>
+                                        <date-picker v-model="till" lang="de" format="DD.MM.YYYY" type="date" value-type="date" :not-before="new Date()" :default-value="new Date()"
+                                                     partial-update="true"></date-picker>
+                                        <date-picker v-model="till_time" lang="de" format="HH:mm" type="time" value-type="format" show-second="false" :minute-step="15"
+                                                     partial-update="true"></date-picker>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -227,8 +230,10 @@
 				selectedAerodrome: null,
 				availableStations: {},
 				station: null,
-				from: null,
-				till: null,
+				from: new Date(),
+                from_time: null,
+				till: new Date(),
+                till_time: null,
 				training: false,
 				event: false,
 				voice: true,
@@ -243,141 +248,147 @@
 			}
 		},
 		methods: {
-			getAerodromes() {
-				axios.get('/api/navigation/aerodromes/local')
-					.then(res => {
-						this.aerodromes = res.data;
-					});
-			},
-			searchStation(input) {
-				if(input.length < 3) {return [] }
-				return this.availableStations.filter(station => {
-					return station.ident.toLowerCase().includes(input.toLowerCase()) || station.name.toLowerCase().includes(input.toLowerCase());
-				});
-			},
-			getSearchStationValue(result) {
-				return result.ident + ' ( ' + result.name + ' )';
-			},
-			handleSearchStationSubmit(result) {
-				if(result != undefined && result != null) {
-					this.station = result;
-				}
-			},
-			handleEditSearchStationSubmit(result) {
-				if(result != undefined && result != null) {
-					this.editStation = result;
-				}
-			},
-			bookStation: function () {
-				this.errors = false;
-				axios.post('/api/booking/atc', {
-					station: this.station.id,
-					from: this.from,
-					till: this.till,
-					training: this.training,
-					event: this.event,
-					voice: this.voice
-				}).then(res => {
-					if(res.data.success) {
-						$('#sysMessages').append('<p class="text-success mb-2">Buchung erfolgreich gespeichert.</p>');
-						this.till = null;
-						this.from = null;
-						this.station = null;
-						this.$refs.personalBookings.update();
-						this.$refs.atcBookings.update();
-						this.errors = false;
-					} else {
-						$('#sysMessages').append('<p class="text-danger mb-2">Buchung fehlgeschlagen.</p>');
-					}
-				}).catch(error => {
-					if(error.response.status == 422) {
-						this.errors = error.response.data.errors;
-					}
-				});
-			},
-			editBooking(params) {
-				this.editmode = true;
-				this.selectedBooking = params;
-				this.editStation = params.station;
-				this.editTraining = params.training;
-				this.editEvent = params.event;
-				this.editVoice = params.voice;
-				this.editFrom = this.convertDate(params.starts_at);
-				this.editTill = this.convertDate(params.ends_at);
-			},
-			saveEditedBooking() {
-				this.errors = false;
-				axios.put('/api/booking/atc/'+this.selectedBooking.id, {
-					station: this.editStation.id,
-					from: this.editFrom,
-					till: this.editTill,
-					training: this.editTraining,
-					event: this.editEvent,
-					voice: this.editVoice
-				}).then(res => {
-					if(res.data.success) {
-						$('#sysMessages').append('<p class="text-success mb-2">Buchung erfolgreich geändert.</p>');
-						this.editTill = null;
-						this.editFrom = null;
-						this.editStation = null;
-						this.editTraining = false;
-						this.editEvent = false;
-						this.editVoice = false;
-						this.editmode = false;
-						this.$refs.personalBookings.update();
-						this.$refs.atcBookings.update();
-						this.errors = false;
-					} else {
-						$('#sysMessages').append('<p class="text-danger mb-2">Änderung der Buchung fehlgeschlagen.</p>');
-					}
-				}).catch(error => {
-					if(error.response.status == 422) {
-						this.errors = error.response.data.errors;
-					}
-				});
-			},
-			cancelEdit() {
-				this.editmode = false;
-				this.selectedBooking = null;
-				this.editStation = null;
-				this.editFrom = null;
-				this.editTill = null;
-				this.editTraining = false;
-				this.editEvent = false;
-				this.editVoice = false;
-				this.errors = false;
-			},
-			deleteBooking(params) {
-				axios.delete('/api/booking/atc/'+params.id)
-				.then(res => {
-					if(res.data.success) {
-						$('#sysMessages').append('<p class="text-success mb-2">Buchung erfolgreich gelöscht.</p>');
-						this.$refs.personalBookings.update();
-						this.$refs.atcBookings.update();
-						this.errors = false;
-					} else {
-						$('#sysMessages').append('<p class="text-danger mb-2">Löschen der Buchung fehlgeschlagen.</p>');
-					}
-				}).catch(error => {
-					if(error.response.status == 422) {
-						this.errors = error.response.data.errors;
-					}
-				});
-			},
-			loadAvailableStations: function () {
-				axios.get('/api/navigation/stations')
-					.then(res => {
-						this.availableStations = res.data
-					});
-			},
-			renderTimeNow: function () {
+            getAerodromes() {
+                axios.get('/api/navigation/aerodromes/local')
+                    .then(res => {
+                        this.aerodromes = res.data;
+                    });
+            },
+            searchStation(input) {
+                if (input.length < 3) {
+                    return []
+                }
+                return this.availableStations.filter(station => {
+                    return station.ident.toLowerCase().includes(input.toLowerCase()) || station.name.toLowerCase().includes(input.toLowerCase());
+                });
+            },
+            getSearchStationValue(result) {
+                return result.ident + ' ( ' + result.name + ' )';
+            },
+            handleSearchStationSubmit(result) {
+                if (result != undefined && result != null) {
+                    this.station = result;
+                }
+            },
+            handleEditSearchStationSubmit(result) {
+                if (result != undefined && result != null) {
+                    this.editStation = result;
+                }
+            },
+            bookStation: function () {
+                this.errors = false;
+                axios.post('/api/booking/atc', {
+                    station: this.station.id,
+                    from: this.convertDateOnly(this.from) + " " + this.from_time,
+                    till: this.convertDateOnly(this.till) + " " + this.till_time,
+                    training: this.training,
+                    event: this.event,
+                    voice: this.voice
+                }).then(res => {
+                    if (res.data.success) {
+                        $('#sysMessages').append('<p class="text-success mb-2">Buchung erfolgreich gespeichert.</p>');
+                        this.till = null;
+                        this.from = null;
+                        this.station = null;
+                        this.$refs.personalBookings.update();
+                        this.$refs.atcBookings.update();
+                        this.errors = false;
+                    } else {
+                        $('#sysMessages').append('<p class="text-danger mb-2">Buchung fehlgeschlagen.</p>');
+                    }
+                }).catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                });
+            },
+            editBooking(params) {
+                this.editmode = true;
+                this.selectedBooking = params;
+                this.editStation = params.station;
+                this.editTraining = params.training;
+                this.editEvent = params.event;
+                this.editVoice = params.voice;
+                this.editFrom = this.convertDate(params.starts_at);
+                this.editTill = this.convertDate(params.ends_at);
+            },
+            saveEditedBooking() {
+                this.errors = false;
+                axios.put('/api/booking/atc/' + this.selectedBooking.id, {
+                    station: this.editStation.id,
+                    from: this.editFrom,
+                    till: this.editTill,
+                    training: this.editTraining,
+                    event: this.editEvent,
+                    voice: this.editVoice
+                }).then(res => {
+                    if (res.data.success) {
+                        $('#sysMessages').append('<p class="text-success mb-2">Buchung erfolgreich geändert.</p>');
+                        this.editTill = null;
+                        this.editFrom = null;
+                        this.editStation = null;
+                        this.editTraining = false;
+                        this.editEvent = false;
+                        this.editVoice = false;
+                        this.editmode = false;
+                        this.$refs.personalBookings.update();
+                        this.$refs.atcBookings.update();
+                        this.errors = false;
+                    } else {
+                        $('#sysMessages').append('<p class="text-danger mb-2">Änderung der Buchung fehlgeschlagen.</p>');
+                    }
+                }).catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                });
+            },
+            cancelEdit() {
+                this.editmode = false;
+                this.selectedBooking = null;
+                this.editStation = null;
+                this.editFrom = null;
+                this.editTill = null;
+                this.editTraining = false;
+                this.editEvent = false;
+                this.editVoice = false;
+                this.errors = false;
+            },
+            deleteBooking(params) {
+                axios.delete('/api/booking/atc/' + params.id)
+                    .then(res => {
+                        if (res.data.success) {
+                            $('#sysMessages').append('<p class="text-success mb-2">Buchung erfolgreich gelöscht.</p>');
+                            this.$refs.personalBookings.update();
+                            this.$refs.atcBookings.update();
+                            this.errors = false;
+                        } else {
+                            $('#sysMessages').append('<p class="text-danger mb-2">Löschen der Buchung fehlgeschlagen.</p>');
+                        }
+                    }).catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    }
+                });
+            },
+            loadAvailableStations: function () {
+                axios.get('/api/navigation/stations')
+                    .then(res => {
+                        this.availableStations = res.data
+                    });
+            },
+            renderTimeNow: function () {
                 // Calculate UTC by subtracting the OFFSET
                 return moment().subtract(moment().utcOffset(), 'minutes').startOf('hour');
             },
             convertDate: function (date) {
                 return moment.utc(date).format('DD.MM.YYYY HH:mm');
-            }
-		},
+            },
+            convertDateOnly: function (date)
+            {
+                return moment.utc(date).format('DD.MM.YYYY');
+            },
+        },
 		computed: {
         	validationErrors(){
                 let errors = Object.values(this.errors);
