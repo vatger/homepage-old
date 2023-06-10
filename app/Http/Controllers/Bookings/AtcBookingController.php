@@ -45,7 +45,7 @@ class AtcBookingController extends VatBookController
 	public function index(Request $request)
 	{
 		if($request->ajax()) {
-            if(auth()->check())
+            if(auth()->check() || $request->bearerToken() == config('booking.atcBookingToken'))
 			    return AtcSessionBooking::orderBy('starts_at', 'ASC')
                     ->with('station', 'controller')
                     ->whereBetween('ends_at', [Carbon::now()->utc(), Carbon::now()->utc()->addHours(48)])
