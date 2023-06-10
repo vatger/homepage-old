@@ -36,7 +36,10 @@
 							<td colspan="3">{{ atc.starts_at | moment("utc", "DD.MM.YYYY")}}</td>
 						</tr>
 						<tr v-bind:key="atc.id">
-							<td>{{ atc.station.ident }} <br/> {{ atc.controller.firstname }} {{ atc.controller.lastname }} ({{ atc.controller.id }})</td>
+                            <td>{{ atc.station.ident }} <br/>
+                                <div v-if="atc.controller">{{ atc.controller.firstname }} {{ atc.controller.lastname }} ({{ atc.controller.id }} )</div>
+                                <div v-else>{{ atc.controller_id }}</div>
+                            </td>
 							<td>{{ atc.station.fixedFrequency }}</td>
 							<td>{{ atc.starts_at | moment("utc", "HH:mm")}} - {{ atc.ends_at | moment("utc", "HH:mm") }}</td>
 						</tr>

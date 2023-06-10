@@ -45,11 +45,16 @@ class AtcBookingController extends VatBookController
 	public function index(Request $request)
 	{
 		if($request->ajax()) {
-
-			return AtcSessionBooking::orderBy('starts_at', 'ASC')
-				->with('station', 'controller')
-				->whereBetween('ends_at', [Carbon::now()->utc(), Carbon::now()->utc()->addHours(48)])
-				->get();
+            if(auth()->check())
+			    return AtcSessionBooking::orderBy('starts_at', 'ASC')
+                    ->with('station', 'controller')
+                    ->whereBetween('ends_at', [Carbon::now()->utc(), Carbon::now()->utc()->addHours(48)])
+                    ->get();
+            else
+                return AtcSessionBooking::orderBy('starts_at', 'ASC')
+                    ->with('station')
+                    ->whereBetween('ends_at', [Carbon::now()->utc(), Carbon::now()->utc()->addHours(48)])
+                    ->get();
 		}
 	}
 
@@ -87,11 +92,18 @@ class AtcBookingController extends VatBookController
 	            }
 	            // As we now have our end date
 	            // we can try to find stuff
-	            return AtcSessionBooking::orderBy('starts_at', 'ASC')
-	            	->with('station', 'controller')
-	                ->whereBetween('starts_at', [$s, $e])
-	                ->orWhereBetween('ends_at', [$s, $e])
-	                ->get();
+                if(auth()->check())
+                    return AtcSessionBooking::orderBy('starts_at', 'ASC')
+                        ->with('station', 'controller')
+                        ->whereBetween('starts_at', [$s, $e])
+                        ->orWhereBetween('ends_at', [$s, $e])
+                        ->get();
+                else
+                    return AtcSessionBooking::orderBy('starts_at', 'ASC')
+                        ->with('station')
+                        ->whereBetween('starts_at', [$s, $e])
+                        ->orWhereBetween('ends_at', [$s, $e])
+                        ->get();
 	        } catch (InvalidArgumentException $e) {
 	            return null;
 	        }

@@ -277,19 +277,17 @@ Route::middleware('optionalAuth:api')
                         Route::get('solos', 'ATD\ATDController@solos');
                     }
                 );
+            // Booking api endpoints
+            Route::prefix('booking')
+                ->group(
+                    function () {
+                        Route::get('atc/daterange/{start}/{end?}', 'Bookings\AtcBookingController@dateRange');
+                        Route::get('atc', 'Bookings\AtcBookingController@index');
+                    }
+                );
+
         }
     );
-
-
-
-// Booking api endpoints
-Route::prefix('booking')
-	->group(
-		function () {
-			Route::get('atc/daterange/{start}/{end?}', 'Bookings\AtcBookingController@dateRange');
-			Route::get('atc', 'Bookings\AtcBookingController@index');
-		}
-	);
 
 // Navigation Endpoints
 Route::prefix('navigation')
