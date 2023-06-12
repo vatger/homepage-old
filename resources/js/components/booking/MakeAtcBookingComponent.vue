@@ -386,7 +386,7 @@
             },
             convertDateOnly: function (date)
             {
-                return moment.utc(date).format('DD.MM.YYYY');
+                return moment(date).format('DD.MM.YYYY');
             },
         },
 		computed: {
