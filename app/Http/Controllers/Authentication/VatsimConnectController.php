@@ -32,8 +32,8 @@ class VatsimConnectController extends Controller
 		if(!$request->has('code') || !$request->has('state'))
 		{
 			try{
-				$response = \Illuminate\Support\Facades\Http::timeout(3)->get(config('vatsim_auth.base'));
-				if($response->successful()) {
+				$response = \Illuminate\Support\Facades\Http::timeout(30)->get(config('vatsim_auth.base'));
+				if ($response->status() < 500 || $response->status() > 599) {
 					// Unkown authentication process state.
 					// Begin at step 1
 					$authUrl = $this->_provider->getAuthorizationUrl();
@@ -74,7 +74,7 @@ class VatsimConnectController extends Controller
 		} catch(UnexpectedValueException $e){
 			return redirect()->route('vatauth.failed');
 		}
-		
+
 		if(	!isset($resourceOwner->data) ||
 			!isset($resourceOwner->data->cid) ||
 			!isset($resourceOwner->data->personal->name_first) ||
@@ -158,7 +158,7 @@ class VatsimConnectController extends Controller
             $account->data()->save(new \App\Models\Membership\Account\Data(['account_id' => $account->id]));
             $account->load('data');
         }
-        
+
         $account->data->active = true;
         $account->data->suspended = false;
 
