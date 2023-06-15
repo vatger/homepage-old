@@ -42,7 +42,7 @@ return array (
             </h1>
             <p class="sub">Auf diesen Seiten findest du alle notwendigen Informationen um in der vACC Germany zu lotsen oder zu fliegen.</p>
 						<p class="pb-20">
-							VATSIM Germany ist Mitglied in der <b><a href="https://www.vateud.net" target="_blank">VATSIM Europe Division</a></b>, die wiederum mit weiteren Divisions die <b><a href="https://www.vatsim.eu/" target="_blank">VATSIM Europe, Middle East and Africa Region</a></b> bildet. Insgesamt sind sie Teil des globalen <a href="https://www.vatsim.net" target="_blank"><b>VATSIM</b></a>-Netzwerks, das Piloten, die mit ihrem Flugsimulator an dieses Netzwerk angeschlossen sind, ATC-Dienste über das Internet kostenlos zur Verfügung stellt.
+							VATSIM Germany ist Mitglied in der <b><a href="https://www.vateud.net" target="_blank">VATSIM Europe Division</a></b>, die wiederum mit weiteren Divisions die <b><a href="https://vatsim.net/docs/regions/emea" target="_blank">VATSIM Europe, Middle East and Africa Region</a></b> bildet. Insgesamt sind sie Teil des globalen <a href="https://www.vatsim.net" target="_blank"><b>VATSIM</b></a>-Netzwerks, das Piloten, die mit ihrem Flugsimulator an dieses Netzwerk angeschlossen sind, ATC-Dienste über das Internet kostenlos zur Verfügung stellt.
             </p>
             <p>Viel Spaß im virtuellen deutschen Luftraum</p>
             <p>Euer VATSIM Germany Staff</p>',
