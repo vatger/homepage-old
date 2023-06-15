@@ -39,7 +39,7 @@ return array (
   'welcome' => '<h6>The vACC for Germany on the VATSIM network.</h6>
     <h1>Welcome to VATSIM Germany</h1>
     <p class="sub">On these pages you will find information on how to become a controller within our vACC, as well as about flying within vACC Germany\'s area.</p>
-    <p class="pb-20">VATSIM Germany is part of the <a href="https://www.vateud.net" target="_blank"><b>VATSIM Europe Division</b></a>, which together with other divisions forms the <a href="https://www.vatsim.eu/" target="_blank"><b>VATSIM Europe, Middle East and Africa Region</b></a>. Altogether they are a part of the global <a href="https://www.vatsim.net" target="_blank"><b>VATSIM</b></a> network, which provides ATC services over the internet free of charge to pilots connected to this network using their flight simulator.</p>
+    <p class="pb-20">VATSIM Germany is part of the <a href="https://www.vateud.net" target="_blank"><b>VATSIM Europe Division</b></a>, which together with other divisions forms the <a href="https://vatsim.net/docs/regions/emea" target="_blank"><b>VATSIM Europe, Middle East and Africa Region</b></a>. Altogether they are a part of the global <a href="https://www.vatsim.net" target="_blank"><b>VATSIM</b></a> network, which provides ATC services over the internet free of charge to pilots connected to this network using their flight simulator.</p>
     <p>Enjoy your stay in German airspace!</p>
     <p>Your Staff of VATSIM Germany</p>',
 );
