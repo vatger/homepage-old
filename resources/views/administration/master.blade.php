@@ -143,12 +143,12 @@
                         <li class="nav-header">
                             Events
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <router-link to="/administration" :class="'nav-link disabled'" active-class="" exact>
                                 <i class="nav-icon fas fa-box"></i>
                                 <p><del>Sammelbuchungen</del></p>
                             </router-link>
-                        </li>
+                        </li> --}}
                         @can('administration.event.routes')
                         <li class="nav-item">
                             <router-link to="/administration/events/routes" :class="'nav-link'" active-class="active" exact>
