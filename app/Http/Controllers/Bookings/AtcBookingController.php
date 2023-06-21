@@ -3,38 +3,13 @@
 namespace App\Http\Controllers\Bookings;
 
 use App\Http\Controllers\Bookings\VatBookController;
+use App\Libraries\ATCBookingsApi;
 use Illuminate\Http\Request;
 use App\Models\Booking\AtcSessionBooking;
 use Carbon\Carbon;
 
-class AtcBookingController extends VatBookController
+class AtcBookingController
 {
-
-	function __construct()
-	{
-		parent::__construct();
-
-		$this->vatbookBaseUrl = config('booking.vatbookBaseUrl');
-        $this->eventBaseUrl = config('booking.eventBaseUrl');
-		$this->testing = config('booking.testing');
-
-		// See https://stackoverflow.com/questions/30959210/set-default-query-string-in-guzzle-6 for details
-        // on this approach regarding the TEST parameter added to test bookings
-        $handler = \GuzzleHttp\HandlerStack::create();
-
-        // Add TEST parameter if we are only testing
-        if ($this->testing) {
-            $handler->push(\GuzzleHttp\Middleware::mapRequest(function (\Psr\Http\Message\RequestInterface $request) {
-                return $request->withUri(\GuzzleHttp\Psr7\Uri::withQueryValue($request->getUri(), 'TEST', '1'));
-            }));
-        }
-
-        $this->client = new \GuzzleHttp\Client([
-            'base_uri' => $this->vatbookBaseUrl,
-            'handler' => $handler,
-        ]);
-
-	}
 
 	/**
 	 * Gets all bookings within the next 48 hours
@@ -252,30 +227,18 @@ class AtcBookingController extends VatBookController
 	        $booking->event = $validated['event'] ? true : false;
 	        $booking->starts_at = $startsAt;
 	        $booking->ends_at = $endsAt;
-	        $booking->save();
+	        //$booking->save();
 
+            $res = ATCBookingsApi::createAndSaveBooking($booking);
 
-	        if ($this->sendInsertRequest($booking)) {
-	        	$this->account->notify(new \App\Notifications\Booking\AtcBookingCreatedNotification());
-	            return response()->json(
-	                [
-	                    'success' => true,
-	                ],
-	                200
-	            );
-	        } else {
-				$this->account->notify(new \App\Notifications\Booking\AtcBookingCreatedNotification());
-	            return response()->json(
-	                [
-						'success' => true,
-						'errors' => [
-							trans('booking.errors.failedVatbook.insert'),
-						],
-	                ],
-	                422
-	            );
-	        }
-
+            if($res['ok']) {
+                $this->account->notify(new \App\Notifications\Booking\AtcBookingCreatedNotification());
+                return response()->json(['success' => true], 200);
+            }
+            else {
+                $this->account->notify(new \App\Notifications\Booking\AtcBookingCreatedNotification());
+                return response()->json(['success' => true, 'errors' => [$res['message']],], 422);
+            }
 		}
 	}
 
@@ -405,32 +368,18 @@ class AtcBookingController extends VatBookController
 	        $booking->event = $validated['event'] ? true : false;
 	        $booking->starts_at = $startsAt;
 	        $booking->ends_at = $endsAt;
-	        $booking->save();
+	        //$booking->save();
 
+           $res = ATCBookingsApi::editBooking($booking);
 
-	        if ($this->sendUpdateRequest($booking)) {
-	        	$this->account->notify(new \App\Notifications\Booking\AtcBookingUpdateNotification());
-
-	            return response()->json(
-	                [
-	                    'success' => true,
-	                ],
-	                200
-	            );
-	        } else {
-	            $this->account->notify(new \App\Notifications\Booking\AtcBookingUpdateNotification());
-
-	            return response()->json(
-	                [
-						'success' => true,
-						'errors' => [
-							trans('booking.errors.failedVatbook.update'),
-						],
-	                ],
-	                422
-	            );
-	        }
-
+            if($res['ok']) {
+                $this->account->notify(new \App\Notifications\Booking\AtcBookingUpdateNotification());
+                return response()->json(['success' => true], 200);
+            }
+            else {
+                $this->account->notify(new \App\Notifications\Booking\AtcBookingUpdateNotification());
+                return response()->json(['success' => true, 'errors' => [$res['message']],], 422);
+            }
 		}
 	}
 
@@ -447,40 +396,16 @@ class AtcBookingController extends VatBookController
 		{
 			if($booking->controller_id === $this->account->id)
 			{
-
-                if ($booking->vatbook_id == 0) {
-                    $booking->delete();
-                    return response()->json( ['success' => true, ], 200 );
-                }
-
-				if ($this->sendDeleteRequest($booking)) {
-					$booking->delete();
-
-					$this->account->notify(new \App\Notifications\Booking\AtcBookingDeletedNotification());
-
-					return response()->json(
-			        	[
-			        		'success' => true,
-			        	],
-			        	200
-			        );
+                $res = ATCBookingsApi::deleteBooking($booking);
+				if ($res['ok']) {
+                    $this->account->notify(new \App\Notifications\Booking\AtcBookingDeletedNotification());
+					return response()->json( ['success' => true ],200);
 				} else {
-					return response()->json(
-			        	[
-			        		'success' => false,
-			        	],
-			        	200
-			        );
+                    return response()->json([ 'errors' => [$res['message']]],422 );
 				}
 			} else {
-				return response()->json(
-	                [
-	                    'errors' => [
-	                    	trans('booking.errors.notController'),
-	                    ],
-	                ],
-	                422
-	            );
+				return response()
+                    ->json([ 'errors' => [ trans('booking.errors.notController'),],],422 );
 			}
 		}
 	}
