@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Bookings;
 
-use App\Http\Controllers\Bookings\VatBookController;
+
+use App\Http\Controllers\Controller;
 use App\Libraries\ATCBookingsApi;
 use Illuminate\Http\Request;
 use App\Models\Booking\AtcSessionBooking;
 use Carbon\Carbon;
 
-class AtcBookingController
+class AtcBookingController extends Controller
 {
 
 	/**
