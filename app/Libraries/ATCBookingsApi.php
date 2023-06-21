@@ -42,6 +42,8 @@ class ATCBookingsApi
             ];
         }
         if ($res['code'] != 201) {
+            $booking->vatbook_id = null;
+            $booking->save();
             return [
                 'ok' => false,
                 'message' => 'Error in synchronisation!'
@@ -151,7 +153,6 @@ class ATCBookingsApi
     private static function send($method, $endpoint, $form_params): array
     {
         $client = new Client([
-            'base_uri' => config('vatsim_api.booking_base'),
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
@@ -160,7 +161,9 @@ class ATCBookingsApi
             'connect_timeout' => 25,
         ]);
 
-        $res = $client->request($method, $endpoint, ['form_params' => $form_params, 'http_errors' => false]);
+        $url = config('vatsim_api.booking_base') . '/' . $endpoint;
+
+        $res = $client->request($method,$url , ['form_params' => $form_params, 'http_errors' => false]);
         return ['code' => $res->getStatusCode(), 'data' => json_decode($res->getBody())];
     }
 }
