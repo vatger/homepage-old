@@ -31,8 +31,8 @@ class ATCBookingsApi
             'callsign' => $booking->station->ident,
             'cid' => $booking->controller_id,
             'type' => $type,
-            'start' => $booking->starts_at,
-            'end' => $booking->ends_at,
+            'start' => $booking->starts_at->toDateTimeString(),
+            'end' => $booking->ends_at->toDateTimeString(),
         ]);
 
         if ($res['code'] == 422) {
@@ -83,8 +83,8 @@ class ATCBookingsApi
             'callsign' => $booking->station->ident,
             'cid' => $booking->controller_id,
             'type' => $type,
-            'start' => $booking->starts_at,
-            'end' => $booking->ends_at,
+            'start' => $booking->starts_at->toDateTimeString(),
+            'end' => $booking->ends_at->toDateTimeString(),
         ]);
 
         if ($res['code'] == 404) {
