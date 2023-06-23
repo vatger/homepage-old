@@ -19,7 +19,7 @@ class ATCBookingsApi
             $type = 'event';
         }
         if ($booking->training) {
-            $type = 'mentoring';
+            $type = 'training';
         }
         //if ($booking->exam) {
         //    $type = 'exam';
