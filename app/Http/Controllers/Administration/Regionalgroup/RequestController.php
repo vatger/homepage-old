@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers\Administration\Regionalgroup;
 
-
+use App\Libraries\XenBridge;
 use App\Models\Regionalgroups\Regionalgroup;
 use App\Models\Regionalgroups\RegionalgroupRequest;
 use App\Models\Regionalgroups\RegionalgroupTemplate;
@@ -53,7 +53,14 @@ class RequestController extends RegionalgroupController
                 ->causedBy($this->account)
                 ->performedOn($regionalgroupRequest->account)
                 ->log("Hat die Regionalgruppeanfrage mit der RRID {$rrid} akzeptiert!");
-
+            
+            try {
+                $acc = $regionalgroupRequest->account;
+                XenBridge::updateForumAccount($acc);
+            } catch (Exception $e) {
+                //nothing
+            }
+            
             return $rrid;
         }
         abort(403);
