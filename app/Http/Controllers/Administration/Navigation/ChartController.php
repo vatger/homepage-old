@@ -42,7 +42,7 @@ class ChartController extends Controller
 				'chart.href' => 'required|string',
                 'chart.published' => 'nullable|boolean',
                 'chart.public_available' => 'nullable|boolean',
-				'chart.airac' => 'required|numeric',
+				'chart.airac' => 'nullable|numeric',
 				'chart.type' => 'required|in:aoi,afc,agc,apc,sid,star,iac',
 				'chart.fri' => 'required|in:ifr,vfr'
 			]);
@@ -50,9 +50,9 @@ class ChartController extends Controller
 			$chart = new Chart();
 			$chart->name = $validated['chart']['name'];
 			$chart->href = $validated['chart']['href'];
-            $chart->published = boolval($validated['chart']['published']);
-            $chart->public_available = boolval($validated['chart']['public_available']);
-			$chart->airac = intval($validated['chart']['airac']);
+            $chart->published = array_key_exists('published', $validated['chart']) ? boolval($validated['chart']['published']) : false;
+            $chart->public_available = array_key_exists('public_available', $validated['chart']) ? boolval($validated['chart']['public_available']) : false;
+			$chart->airac = array_key_exists('airac', $validated['chart']) ?intval($validated['chart']['airac']) : 0; 
 			$chart->type = $validated['chart']['type'];
 			$chart->fri = $validated['chart']['fri'];
 
