@@ -17,3 +17,4 @@ yarn-error.log
 *-lock.json
 *.lock
 laravel-echo-server.json
+.env.example
