@@ -43,7 +43,7 @@
                             <li class="menu-has-children">
                                 <a href="{{ route('pilot.home') }}">@lang('navigation.pilots.pilots')</a>
                                 <ul>
-                                    <li><a href="{{ config('app.url') }}/pilots/aerodromes">@lang('navigation.pilots.aerodromes')</a></li>
+                                    <li><a href="https://knowledgebase.vatsim-germany.org/shelves/airport-pilotbriefings">@lang('navigation.pilots.aerodromes')</a></li>
                                     <li><a href="https://knowledgebase.vatsim-germany.org/books/pilot" target="_blank">@lang('navigation.pilots.firstSteps')</a></li>
                                     <li><a href="https://knowledgebase.vatsim-germany.org/books/ausbildungsubersicht-ptd" target="_blank">@lang('navigation.pilots.training')</a></li>
                                 </ul>
@@ -55,7 +55,7 @@
                                     <li><a href="https://knowledgebase.vatsim-germany.org/books/atc/page/gastlotsen-vatsim-germany" target="_blank">@lang('navigation.controllers.guests')</a></li>
                                     <li><a href="https://support.vatsim-germany.org/open.php?topicId=19" target="_blank">@lang('navigation.controllers.feedback')</a></li>
                                     <li><a href="https://knowledgebase.vatsim-germany.org/shelves/loa" target="_blank">@lang('navigation.controllers.loa')</a></li>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/shelves/sop" target="_blank">@lang('navigation.controllers.sop')</a></li>
+                                    <li><a href="https://knowledgebase.vatsim-germany.org/shelves/sops-airports" target="_blank">@lang('navigation.controllers.sop')</a></li>
                                     <li><a href="http://files.aero-nav.com/EDXX" target="_blank">@lang('navigation.controllers.sectorfiles')</a></li>
                                     <li><a href="{{ config('app.url') }}/controllers/atd/solos">@lang('navigation.controllers.atdsolos')</a></li>
                                 </ul>

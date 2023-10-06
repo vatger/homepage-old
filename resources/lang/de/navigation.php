@@ -39,7 +39,7 @@ return array (
   'merchandise' => 'Fan-Shop',
   'pilots' =>
   array (
-    'aerodromes' => 'Flugplätze',
+    'aerodromes' => 'Airport Briefings',
     'firstSteps' => 'Erste Schritte',
     'livemap' => 'Livemap',
     'pilots' => 'Piloten',
