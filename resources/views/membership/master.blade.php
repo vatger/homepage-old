@@ -30,6 +30,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
+
+    @include('membership.dashboard.warning')
+
     <div id="app" class="wrapper">
         @include('shared.navigation')
 
