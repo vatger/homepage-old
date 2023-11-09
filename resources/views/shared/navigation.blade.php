@@ -10,7 +10,7 @@
                         @lang('navigation.pilots.pilots')
                     </a>
                     <div class="dropdown-menu" aria-labelledby="pilotDropdown">
-                        <a class="dropdown-item" href="{{ config('app.url') }}/pilots/aerodromes">@lang('navigation.pilots.aerodromes')</a>
+                        <a class="dropdown-item" href="https://knowledgebase.vatsim-germany.org/shelves/airport-pilotbriefings">@lang('navigation.pilots.aerodromes')</a>
                         <a class="dropdown-item" href="{{ config('app.url') }}/pilots/livemap">@lang('navigation.pilots.livemap')</a>
                         <a class="dropdown-item" href="{{ config('app.url') }}/pilots/weather">@lang('navigation.pilots.weather')</a>
                         <a class="dropdown-item" href="https://knowledgebase.vatsim-germany.org/books/pilot" target="_blank">@lang('navigation.pilots.firstSteps')</a>

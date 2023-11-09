@@ -45,9 +45,9 @@ Route::domain('stats.'.parse_url(config('app.url'), PHP_URL_HOST))
 		}
 	);
 
-Route::domain(parse_url(config('app.url'), PHP_URL_HOST))
-	->group(
-		function () {
+//Route::domain(parse_url(config('app.url'), PHP_URL_HOST))
+//	->group(
+Route::middleware([])->group(		function () {
 			/**
 			 * Routes the user must be authenticated for,
 			 * not have been banned and also must have made the basic setup
