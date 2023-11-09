@@ -31,6 +31,8 @@
         @stack('styles')
     </head>
     <body>
+        @include('membership.dashboard.warning')
+
         <div id="app">
             <header id="header" id="home">
                 <div class="container-fluid main-menu">
@@ -103,6 +105,8 @@
                     </div>
                 </div>
             </header>
+
+
 
             @yield('component')
 
