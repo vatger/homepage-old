@@ -109,6 +109,7 @@ class VatsimConnectController extends Controller
 		$account = Account::find($resourceOwner->data->cid);
         //If not we need to create a new one
 		if(!$account) {
+            abort(422, 'disabled');
             // Create new one
 			$account = new Account;
 			$account->id = $resourceOwner->data->cid;

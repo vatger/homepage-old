@@ -163,7 +163,7 @@ class ATCBookingsApi
 
         $url = config('vatsim_api.booking_base') . '/' . $endpoint;
 
-        $res = $client->request($method,$url , ['form_params' => $form_params, 'http_errors' => false]);
+        $res = $client->request($method, $url , ['form_params' => $form_params, 'http_errors' => false]);
         return ['code' => $res->getStatusCode(), 'data' => json_decode($res->getBody())];
     }
 }

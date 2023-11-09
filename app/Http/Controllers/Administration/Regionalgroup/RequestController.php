@@ -29,41 +29,7 @@ class RequestController extends RegionalgroupController
      */
     public function acceptRequest(Request $request, Regionalgroup $regionalgroup, RegionalgroupRequest $regionalgroupRequest)
     {
-        if ($request->ajax()) {
-            $validated = $request->validate([
-                'notificationDetails' => 'string|nullable',
-            ]);
-            // Handle join requests
-            if ($regionalgroupRequest->topic == 'join') {
-                $this->handleJoinRequest($regionalgroup, $regionalgroupRequest, $validated['notificationDetails']);
-            }
-            if ($regionalgroupRequest->topic == 'leave') {
-                $this->handleLeaveRequest($regionalgroup, $regionalgroupRequest, $validated['notificationDetails']);
-            }
-            if ($regionalgroupRequest->topic == 'change') {
-                $this->handleChangeRequest($regionalgroup, $regionalgroupRequest, $validated['notificationDetails']);
-            }
-            // Request type is not known
-            // or our work has been done
-            // Remove and return
-            $rrid = $regionalgroupRequest->id;
-            $regionalgroupRequest->delete();
-
-            activity()
-                ->causedBy($this->account)
-                ->performedOn($regionalgroupRequest->account)
-                ->log("Hat die Regionalgruppeanfrage mit der RRID {$rrid} akzeptiert!");
-            
-            try {
-                $acc = $regionalgroupRequest->account;
-                XenBridge::updateForumAccount($acc);
-            } catch (Exception $e) {
-                //nothing
-            }
-            
-            return $rrid;
-        }
-        abort(403);
+        abort(422, 'disabled');
     }
 
     /**
@@ -76,24 +42,7 @@ class RequestController extends RegionalgroupController
      */
     public function denyRequest(Request $request, Regionalgroup $regionalgroup, RegionalgroupRequest $regionalgroupRequest)
     {
-        if ($request->ajax()) {
-            $validated = $request->validate([
-                'notificationDetails' => 'string|nullable',
-            ]);
-            $regionalgroupRequest->account->notify(new RequestDeniedNotification($regionalgroup, $validated['notificationDetails'] ));
-
-            // Remove and return
-            $rrid = $regionalgroupRequest->id;
-            $regionalgroupRequest->delete();
-
-            activity()
-                ->causedBy($this->account)
-                ->performedOn($regionalgroupRequest->account)
-                ->log("Hat die Regionalgruppenanfrage mit der RRID {$rrid} abgelehnt!");
-
-            return $rrid;
-        }
-        abort(403);
+        abort(422, 'disabled');
     }
 
     /**
