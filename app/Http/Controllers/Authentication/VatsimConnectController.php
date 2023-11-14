@@ -84,13 +84,7 @@ class VatsimConnectController extends Controller
 		) {
 			return redirect()->route('vatauth.failed');
         }
-        // Check for duplicate email
-        if(Account::where('email',  $resourceOwner->data->personal->email)->where('id', '!=', $resourceOwner->data->cid)->exists())
-        {
-            return $this->viewMake('frontend.authentication.dupemail');
-        }
-
-        activity()->disableLogging(); // Disable logging here to only log data updated from the automated system.
+         activity()->disableLogging(); // Disable logging here to only log data updated from the automated system.
 
 		$account = $this->_completeLogin($resourceOwner, $accessToken);
 
@@ -109,7 +103,6 @@ class VatsimConnectController extends Controller
 		$account = Account::find($resourceOwner->data->cid);
         //If not we need to create a new one
 		if(!$account) {
-            abort(422, 'disabled');
             // Create new one
 			$account = new Account;
 			$account->id = $resourceOwner->data->cid;
@@ -138,7 +131,7 @@ class VatsimConnectController extends Controller
 
 		$account->save();
 
-		$account->loadMissing('setting');
+
         if (null == $account->setting) {
             /*
              * This account does not have a setting association.
@@ -153,45 +146,6 @@ class VatsimConnectController extends Controller
             // Set the session language according to users setting
             Session::put('language', $account->setting->language);
         }
-
-        $account->loadMissing('data');
-        if (null == $account->data) {
-            $account->data()->save(new \App\Models\Membership\Account\Data(['account_id' => $account->id]));
-            $account->load('data');
-        }
-
-        $account->data->active = true;
-        $account->data->suspended = false;
-
-        /**
-         * If the scope vatsim_details was granted
-         */
-        if(isset($resourceOwner->data->vatsim) && isset($resourceOwner->data->personal->country)) {
-            $account->data->rating_atc = $resourceOwner->data->vatsim->rating->id;
-            $account->data->rating_pilot = $resourceOwner->data->vatsim->pilotrating->id;
-
-            $account->data->active = $account->data->rating_atc > 0;
-            $account->data->suspended = $account->data->rating_atc < 0;
-
-            /*
-             * Update accounts region/division associations
-             */
-            // User country
-            $account->data->country_code = $resourceOwner->data->personal->country->id;
-            $account->data->country_name = $resourceOwner->data->personal->country->name;
-            // User Region
-            $account->data->region_code = $resourceOwner->data->vatsim->region->id;
-            $account->data->region_name = $resourceOwner->data->vatsim->region->name;
-            // User Division
-            $account->data->division_code = $resourceOwner->data->vatsim->division->id;
-            $account->data->division_name = $resourceOwner->data->vatsim->division->name;
-            // User Subdivision
-            $account->data->subdivision_code = $resourceOwner->data->vatsim->subdivision->id;
-            $account->data->subdivision_name = $resourceOwner->data->vatsim->subdivision->name;
-        }
-
-        $account->data->save();
-
 		return $account;
 	}
 
@@ -209,18 +163,18 @@ class VatsimConnectController extends Controller
 
 	public function local(Request $request)
 	{
-		$validated = $request->validate(
-			[
-				'cid' => 'required|exists:membership_accounts,id',
-				'lpwd' => 'required',
-			]
-		);
-
-		if(Auth::attempt(['id' => $validated['cid'], 'password' => $validated['lpwd']])) {
-			return redirect()->route('membership.home');
-		} else {
+//		$validated = $request->validate(
+//			[
+//				'cid' => 'required|exists:membership_accounts,id',
+//				'lpwd' => 'required',
+//			]
+//		);
+//
+//		if(Auth::attempt(['id' => $validated['cid'], 'password' => $validated['lpwd']])) {
+//			return redirect()->route('membership.home');
+//		} else {
 			return redirect()->route('vatauth.failed');
-		}
+//		}
 	}
 
 }

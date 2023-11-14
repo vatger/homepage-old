@@ -25,9 +25,9 @@ class SetupCompletedMiddleware
     public function handle($request, Closure $next)
     {
 
-        if(!$this->_authGuard->user()->setup_completed) {
-            return redirect()->route('membership.setup');
-        }
+//        if(!$this->_authGuard->user()->setup_completed) {
+//            return redirect()->route('membership.setup');
+//        }
 
         return $next($request);
     }

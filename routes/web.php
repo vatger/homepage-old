@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 /**
  * Statisticcenter subdomain
- */
+ *
 Route::domain('stats.'.parse_url(config('app.url'), PHP_URL_HOST))
 	->group(
 		function () {
@@ -44,6 +44,7 @@ Route::domain('stats.'.parse_url(config('app.url'), PHP_URL_HOST))
 			Route::get('', 'Statistics\StatisticcenterController@index')->name('statistics.home');
 		}
 	);
+*/
 
 //Route::domain(parse_url(config('app.url'), PHP_URL_HOST))
 //	->group(
@@ -66,15 +67,17 @@ Route::middleware([])->group(		function () {
 						Route::prefix('membership')
 							->group(
 								function () {
-									Route::get('setup', 'Membership\MembershipController@setup')
-										->withoutMiddleware('setupCompleted')
-										->name('membership.setup');
-									Route::get('banned', 'Membership\MembershipController@banned')
-										->withoutMiddleware(['setupCompleted', 'checkBanned', 'checkInactive'])
-										->name('membership.banned');
-                                    Route::get('inactive', 'Membership\MembershipController@inactive')
-										->withoutMiddleware(['setupCompleted', 'checkBanned', 'checkInactive'])
-										->name('membership.inactive');
+
+//									Route::get('setup', 'Membership\MembershipController@setup')
+//										->withoutMiddleware('setupCompleted')
+//										->name('membership.setup');
+//									Route::get('banned', 'Membership\MembershipController@banned')
+//										->withoutMiddleware(['setupCompleted', 'checkBanned', 'checkInactive'])
+//										->name('membership.banned');
+//                                    Route::get('inactive', 'Membership\MembershipController@inactive')
+//										->withoutMiddleware(['setupCompleted', 'checkBanned', 'checkInactive'])
+//										->name('membership.inactive');
+
 									Route::get('{vue_capture?}', 'Membership\MembershipController@index')
 										->where('vue_capture', '[\/\w\.-]*')
 										->name('membership.home');
@@ -83,41 +86,41 @@ Route::middleware([])->group(		function () {
 					}
 				);
 
-			Route::prefix('pilots')
-				->group(
-					function ()
-					{
-						Route::get('{vue_capture?}', 'Pilots\PilotController@index')
-							->where('vue_capture', '[\/\w\.-]*')
-							->name('pilot.home');
-					}
-				);
+//			Route::prefix('pilots')
+//				->group(
+//					function ()
+//					{
+//						Route::get('{vue_capture?}', 'Pilots\PilotController@index')
+//							->where('vue_capture', '[\/\w\.-]*')
+//							->name('pilot.home');
+//					}
+//				);
 
-			Route::prefix('controllers')
-				->group(
-					function ()
-					{
-						Route::get('{vue_capture?}', 'Controllers\ControllerController@index')
-							->where('vue_capture', '[\/\w\.-]*')
-							->name('controller.home');
-					}
-				);
+//			Route::prefix('controllers')
+//				->group(
+//					function ()
+//					{
+//						Route::get('{vue_capture?}', 'Controllers\ControllerController@index')
+//							->where('vue_capture', '[\/\w\.-]*')
+//							->name('controller.home');
+//					}
+//				);
 
 			/**
 			 * Routes to access publicly available resources
 			 */
-			Route::prefix('resources')
-				->group(
-					function ()
-					{
-						Route::get('image/{image}', 'Resources\ResourceController@image');
-					}
-				);
+//			Route::prefix('resources')
+//				->group(
+//					function ()
+//					{
+//						Route::get('image/{image}', 'Resources\ResourceController@image');
+//					}
+//				);
 
 			/**
 			 * Impersonate other users
 			 */
-			Route::impersonate();
+//			Route::impersonate();
 
 			/**
 			 * Authentication Routes
@@ -125,7 +128,7 @@ Route::middleware([])->group(		function () {
 			Route::prefix('vatauth')
 				->group(
 					function () {
-							Route::post('local', 'Authentication\VatsimConnectController@local')->name('vatauth.local');
+//							Route::post('local', 'Authentication\VatsimConnectController@local')->name('vatauth.local');
 							Route::get('failed', 'Authentication\VatsimConnectController@failed')->name('vatauth.failed');
 							Route::get('login', 'Authentication\VatsimConnectController@login')->name('vatauth.login');
 							Route::get('logout', 'Authentication\VatsimConnectController@logout')->name('vatauth.logout');
@@ -136,12 +139,10 @@ Route::middleware([])->group(		function () {
 			 * Frontend Routes
 			 */
 
-            Route::get('partners', 'Landingpage\LandingpageController@partners')->name('partners');
+//            Route::get('partners', 'Landingpage\LandingpageController@partners')->name('partners');
 
 
 			// GDPR and Impressum
-			Route::get('gdpr', 'Dataprotection\DisplayController@gdpr')->name('dataprotection.gdpr');
-			Route::get('imprint', 'Dataprotection\DisplayController@imprint')->name('dataprotection.imprint');
 
 			/*
 			 * Translation file combiner to support translations for the frontend

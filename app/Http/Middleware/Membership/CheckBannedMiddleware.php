@@ -25,9 +25,9 @@ class CheckBannedMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if($this->_authGuard->user()->is_currently_homepage_banned) {
-            return redirect()->route('membership.banned');
-        }
+//        if($this->_authGuard->user()->is_currently_homepage_banned) {
+//            return redirect()->route('membership.banned');
+//        }
 
         return $next($request);
     }

@@ -24,9 +24,9 @@ class CheckInactiveMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if($this->_authGuard->user()->isInactive) {
-            return redirect()->route('membership.inactive');
-        }
+//        if($this->_authGuard->user()->isInactive) {
+//            return redirect()->route('membership.inactive');
+//        }
 
         return $next($request);
     }

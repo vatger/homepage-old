@@ -174,7 +174,7 @@ export default {
             return null;
         }
     },
-    activated() {
+created() {
         this.loadEventRoutes();
     },
 };

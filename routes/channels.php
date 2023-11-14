@@ -12,7 +12,3 @@ use Illuminate\Support\Facades\Broadcast;
 | used to check if an authenticated user can listen to the channel.
 |
 */
-
-Broadcast::channel('App.Models.Membership.Account.{id}', function ($account, $id) {
-    return (int) $account->id === (int) $id;
-});

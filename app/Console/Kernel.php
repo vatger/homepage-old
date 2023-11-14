@@ -33,19 +33,19 @@ class Kernel extends ConsoleKernel
         $schedule->command('eventroute:update')->hourlyAt(10)->withoutOverlapping();
 
         // ONLY in production env
-        $schedule->command('forum:sync')->hourly()->withoutOverlapping()->environments(['production']);
+//        $schedule->command('forum:sync')->hourly()->withoutOverlapping()->environments(['production']);
 
         // ONLY in production env
-        $schedule->command('ts:webquery')->hourlyAt(30)->withoutOverlapping()->environments(['production']);
+//        $schedule->command('ts:webquery')->hourlyAt(30)->withoutOverlapping()->environments(['production']);
 
         // Remove unfinished registrations prior to account updates
-        $schedule->command('account:clear-unfinished-registrations')->dailyAt('02:00')->withoutOverlapping();
+//        $schedule->command('account:clear-unfinished-registrations')->dailyAt('02:00')->withoutOverlapping();
 
-        $schedule->command('account:connectupdater')->hourlyAt(45)->withoutOverlapping(60);
+//        $schedule->command('account:connectupdater')->hourlyAt(45)->withoutOverlapping(60);
 
         // ONLY in production or staging env
-        $schedule->command('account:apiupdater')->hourlyAt(20)->withoutOverlapping()->environments(['staging', 'production']);
-        $schedule->command('account:apiupdater')->hourlyAt(40)->withoutOverlapping()->environments(['staging', 'production']);
+//        $schedule->command('account:apiupdater')->hourlyAt(20)->withoutOverlapping()->environments(['staging', 'production']);
+//        $schedule->command('account:apiupdater')->hourlyAt(40)->withoutOverlapping()->environments(['staging', 'production']);
         //
         $schedule->command('activitylog:clean')->daily();
     }

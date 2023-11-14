@@ -41,48 +41,8 @@
                         <a href="{{ route('home') }}"><img src="{{ asset('images/vacc_logo.png') }}" alt="" title="" height="40" /></a>
                       </div>
                       <nav id="nav-menu-container">
+
                         <ul class="nav-menu">
-                            <li class="menu-has-children">
-                                <a href="{{ route('pilot.home') }}">@lang('navigation.pilots.pilots')</a>
-                                <ul>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/shelves/airport-pilotbriefings">@lang('navigation.pilots.aerodromes')</a></li>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/books/pilot" target="_blank">@lang('navigation.pilots.firstSteps')</a></li>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/books/ausbildungsubersicht-ptd" target="_blank">@lang('navigation.pilots.training')</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-has-children">
-                                <a href="{{ route('controller.home') }}">@lang('navigation.controllers.controllers')</a>
-                                <ul>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/books/atc" target="_blank">@lang('navigation.controllers.firstSteps')</a></li>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/books/atc/page/gastlotsen-vatsim-germany" target="_blank">@lang('navigation.controllers.guests')</a></li>
-                                    <li><a href="https://support.vatsim-germany.org/open.php?topicId=19" target="_blank">@lang('navigation.controllers.feedback')</a></li>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/shelves/loa" target="_blank">@lang('navigation.controllers.loa')</a></li>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/shelves/sops-airports" target="_blank">@lang('navigation.controllers.sop')</a></li>
-                                    <li><a href="http://files.aero-nav.com/EDXX" target="_blank">@lang('navigation.controllers.sectorfiles')</a></li>
-                                    <li><a href="{{ config('app.url') }}/controllers/atd/solos">@lang('navigation.controllers.atdsolos')</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-has-children">
-                                <a href="#">@lang('navigation.community.community')</a>
-                                <ul>
-                                    <li><a href="ts3server://ts3.vatsim-germany.org" target="_blank">@lang('navigation.community.teamSpeak')</a></li>
-                                    <li><a href="https://community.vatsim.net" target="_blank">Discord</a></li>
-                                    <li><a href="https://board.vatsim-germany.org" target="_blank">@lang('navigation.community.forum')</a></li>
-                                    <li><a href="https://shop.spreadshirt.de/vatsim-germany" target="_blank">@lang('navigation.merchandise')</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="https://knowledgebase.vatsim-germany.org" target="_blank">@lang('navigation.wiki')</a></li>
-                            <li><a href="{{ route('statistics.home') }}">@lang('navigation.stats')</a></li>
-                            <li class="menu-has-children">
-                                <a href="#">@lang('navigation.tech.tech')</a>
-                                <ul>
-                                    {{--<li><a href="https://tech.vatsim-germany.org" target="_blank">@lang('navigation.tech.blog')</a></li>
-                                    <li><a href="https://status.vatsim-germany.org" target="_blank">@lang('navigation.tech.status')</a></li>--}}
-                                    <li><a href="https://support.vatsim-germany.org" target="_blank">@lang('navigation.tech.support')</a></li>
-                                    <li><a href="mailto:support@vatsim-germany.org" target="_blank">@lang('navigation.tech.mail')</a></li>
-                                    <li><a href="https://knowledgebase.vatsim-germany.org/books/ansprechpartner" target="_blank">@lang('navigation.tech.staff')</a></li>
-                                </ul>
-                            </li>
                             <li>
                                 @if(Session::has('language') && Session::get('language') != 'en')
                                 <a href="{{ route('language.change', ['language' => 'en']) }}">
@@ -101,6 +61,7 @@
                             <li><a href="{{ route('vatauth.login') }}">@lang('navigation.auth.login')</a></li>
                             @endif
                         </ul>
+
                       </nav>
                     </div>
                 </div>
@@ -126,7 +87,7 @@
                             <p>
                                 Copyright &copy; {{ date('Y') }}. For Flight Simulation Use Only.
                                 <span class="float-right text-right">
-                                    <a href="{{ route('dataprotection.gdpr') }}">@lang('navigation.gdpr')</a> | <a href="{{ route('dataprotection.imprint') }}">@lang('navigation.imprint')</a>
+                                    <a href="https://vatsim-germany.org/gdpr">@lang('navigation.gdpr')</a> | <a href="https://vatsim-germany.org/imprint">@lang('navigation.imprint')</a>
                                 </span>
                             </p>
                         </div>

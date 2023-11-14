@@ -55,66 +55,6 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column nav-flat text-sm nav-compact" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <router-link to="/membership" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>@lang('navigation.dashboard')</p>
-                            </router-link>
-                        </li>
-                        <li class="nav-header">
-                            <p>@lang('navigation.pilots.pilots')</p>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/pilots/aerodromes" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fas fa-plane"></i>
-                                <p>@lang('navigation.pilots.aerodromes')</p>
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/pilots/weather" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fas fa-wind"></i>
-                                <p>@lang('navigation.pilots.weather')</p>
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/pilots/livemap" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fas fa-map"></i>
-                                <p>@lang('navigation.pilots.livemap')</p>
-                            </router-link>
-                        </li>
-                        <li class="nav-header">
-                            <p>@lang('navigation.controllers.controllers')</p>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/membership/booking" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fa fa-wifi"></i>
-                                <p>@lang('navigation.controllers.atcBooking')</p>
-                            </router-link>
-                        </li>
-                        {{-- <li class="nav-item">
-                            <router-link to="/membership/atd/training" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fa fa-wifi"></i>
-                                <p>@lang('navigation.controllers.atd.training')</p>
-                            </router-link>
-                        </li> --}}
-                        <li class="nav-header">
-                            <p>@lang('navigation.regionalgroups.regionalgroups')</p>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/membership/regionalgrouprequests" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fas fa-question"></i>
-                                <p>@lang('navigation.regionalgroups.requests')</p>
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/membership/regionalgroups" :class="'nav-link'" active-class="active" exact>
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>@lang('navigation.regionalgroups.mygroups')</p>
-                            </router-link>
-                        </li>
-                        <li class="nav-header">
-                            <p>@lang('event.event')</p>
-                        </li>
-                        <li class="nav-item">
                             <router-link to="/membership/events/routes" :class="'nav-link'" active-class="active" exact>
                                 <i class="nav-icon fas fa-route"></i>
                                 <p>@lang('event.eventroutes')</p>
@@ -139,7 +79,7 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                For Flight Simulation Use Only! <b>Version {{ config('app.version') }}</b> | <a href="{{ route('dataprotection.gdpr') }}">@lang('navigation.gdpr')</a> | <a href="{{ route('dataprotection.imprint') }}">@lang('navigation.imprint')</a>
+                For Flight Simulation Use Only! <b>Version {{ config('app.version') }}</b> | <a href="https://vatsim-germany.org/gdpr">@lang('navigation.gdpr')</a> | <a href="https://vatsim-germany.org/imprint">@lang('navigation.imprint')</a>
             </div>
             <strong>Copyright &copy; {{ date("Y") }}, <a href="{{ route('home') }}">VATSIM Germany</a>.</strong> All rights reserved.
         </footer>
